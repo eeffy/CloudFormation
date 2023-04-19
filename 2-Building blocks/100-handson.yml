@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: cloudformation template to create Ec2 instances 
+
+Parameters: 
+  AMIID: 
+    Description: ECE Image Id
+    Type: String 
+  InstanceType: 
+    Description: "type of EC2 instance" 
+    Default: "t2.micro"
+    Type: String   
+
+
+Resources:
+  webserver:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: !Ref AMIID
+      InstanceType: !Ref InstanceType   
+      BlockDeviceMappings:
+        -
+          DeviceName: /dev/xvda
+          Ebs:
+            VolumeType: gp2            
+            DeleteOnTermination: true
+            VolumeSize: 8    
+      Tags: 
+         - Key: Environment 
+           Value: Linuxos 
+         - Key: createdby 
+           Value: Tisan 
+         - Key: Name 
+           Value: Webserver  
+
+  

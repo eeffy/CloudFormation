@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: A sample template
+Resources:
+  Instance1:
+    Type: "AWS::EC2::Instance"
+    Properties: 
+      ImageId: "ami-04581fbf744a7d11f"
+      InstanceType: t2.micro      
+      BlockDeviceMappings:
+        -
+          DeviceName: /dev/xvda
+          Ebs:
+            VolumeType: gp2            
+            DeleteOnTermination: true
+            VolumeSize: 8    
+      Tags: 
+         - Key: Environment 
+           Value: Linuxos 
+         - Key: createdby 
+           Value: Tisan 
+         - Key: Name 
+           Value: Webserver  
+
+  Instance2:
+    Type: "AWS::EC2::Instance"
+    Properties: 
+      ImageId: "ami-04581fbf744a7d11f"
+      InstanceType: t2.micro      
+      BlockDeviceMappings:
+        -
+          DeviceName: /dev/xvda
+          Ebs:
+            VolumeType: gp2            
+            DeleteOnTermination: true
+            VolumeSize: 10    
+      Tags: 
+         - Key: Environment 
+           Value: Linuxos 
+         - Key: createdby 
+           Value: Tisan 
+         - Key: Name 
+           Value: appserver        
+
+  CreatingS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+       BucketName: assignmentbakkoo
+       AccessControl: PublicRead
+ 
+
+

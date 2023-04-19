@@ -1,0 +1,27 @@
+# This is a hands-on task to create the cloudformation stack with
+# 2 EC2 instances in total & one s3 bucket
+# Webserver with 8gb EBS
+# Appserver with 10gb EBS
+# One S3 bucket to store invoice pdf files
+
+
+
+
+Resources:
+  webserver: 
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-04581fbf744a7d11f"
+      InstanceType: "t2.micro"
+      BlockDeviceMappings: 
+      - DeviceName: "/dev/sdm"
+        Ebs: 
+          VolumeType: "io1"
+          Iops: "200"
+          DeleteOnTermination: "false"
+          VolumeSize: "20"
+      - DeviceName: "/dev/sdk"
+        NoDevice: {}
+
+
+    

@@ -1,0 +1,36 @@
+# try to update the DBInstanceIdentifier after creation to see the Update Replace Policy behaviour
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation template to create RDS instance with parameters
+Parameters:
+  DBInstanceIdentifier:
+    Type: String
+  AllocatedStorage:
+    Type: Number
+  MasterUsername:
+    Type: String
+  MasterUserPassword:
+    Type: String
+    NoEcho: true
+  DBInstanceClass:
+    Type: String
+    Default: db.t2.micro
+    AllowedValues:
+      - db.t2.micro
+      - db.t2.small
+      - db.t2.medium
+      - db.t3.micro
+      - db.t3.small
+      - db.t3.medium
+Resources:
+  MyDBInstance:
+    Type: 'AWS::RDS::DBInstance'
+    DeletionPolicy: Snapshot
+    UpdateReplacePolicy: Retain
+    Properties:
+      DBInstanceIdentifier: !Ref DBInstanceIdentifier
+      AllocatedStorage: !Ref AllocatedStorage
+      DBInstanceClass: !Ref DBInstanceClass
+      Engine: MySQL
+      MasterUsername: !Ref MasterUsername
+      MasterUserPassword: !Ref MasterUserPassword
+      BackupRetentionPeriod: 0
